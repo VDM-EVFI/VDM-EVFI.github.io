@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Consistent Video Restoration Through Turbulence with
+        Test-time Optimization of Neural Video Representations">
+  <meta name="keywords" content="Nerfies, D-NeRF, NeRF">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Repurposing Pre-trained Video Diffusion Models for Event-based Video Interpolation</title>
+
+
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-size-2 publication-title">Repurposing Pre-trained Video Diffusion Models for Event-based Video
+            Interpolation</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://codingrex.github.io/">Jingxi Chen</a><sup>1</sup>,
+              <a href="https://brandonyfeng.github.io/">Brandon Y. Feng</a><sup>2</sup>,
+              <a href="https://www.haomingcai.com/">Haoming Cai</a><sup>1</sup>, 
+              <a href="https://tianfwang.github.io/">Tianfu Wang</a><sup>1</sup>,
+              <a href="https://www.aftersomemath.com/">Levi Burner</a><sup>1</sup>,
+              <a href="https://www.cs.umd.edu/~dhyuan/">Dehao Yuan</a><sup>1</sup>, </br>
+              <a href="http://users.umiacs.umd.edu/~fer/">Cornelia Fermüller</a><sup>1</sup>,
+              <a href="http://www.cs.umd.edu/~metzler/">Christopher Metzler</a><sup>1</sup>,
+              <a href="https://robotics.umd.edu/clark/faculty/350/Yiannis-Aloimonos">Yiannis Aloimonos</a><sup>1</sup>
+
+
+
+              
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <span class="author-block"><sup>1</sup>University of Maryland, College Park,</span>
+              <span class="author-block"><sup>2</sup>Massachusetts Institute of Technology</span>
+              
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <span class="link-block">
+                <span class="link-block">
+                  <a href="https://arxiv.org/"
+                     class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                        <i class="ai ai-arxiv"></i>
+                    </span>
+                    <span> arXiv </span>
+                  </a>
+                </span>
+              
+                <span class="link-block">
+                  <a href="https://github.com/"
+                     class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                        <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code (Coming Soon)</span>
+                    </a>
+                </span>
+              <!-- Dataset Link. -->
+              <span class="link-block">
+               
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+
+
+  <div class="columns is-centered">
+  
+      <!-- Visual Effects. -->
+      <div class="column">
+        <div class="content">
+          <div class="column has-text-centered">
+          
+          <div class="columns is-centered">
+          <div style="width: 1200px; height: 700px; text-align: center; padding: 10px;">
+            <img src="./static/images/Arxiv_Figure.png"
+                 class="interpolation-image"
+                 alt="methods"/>
+          </div>
+          </div>
+
+        
+
+          <h2 class="title is-3"> Abstract </h2>
+
+          <div class="columns is-centered">
+            <div style="width: 1400px; height: 150px; text-align: center; padding: 10px;">
+              Video Frame Interpolation aims to recover realistic missing frames between observed frames, generating a high-frame-rate video from a low-frame-rate video. However, without additional guidance, large motion between frames makes this problem ill-posed. Event-based Video Frame Interpolation (EVFI) addresses this challenge by using sparse, high-temporal-resolution event measurements as motion guidance. This guidance allows EVFI methods to significantly outperform frame-only methods. However, to date, EVFI methods have relied upon a limited set of paired event-frame training data, severely limiting their performance and generalization capabilities. 
+In this work,  we overcome the limited data challenge by adapting pre-trained video diffusion models trained on internet-scale datasets to EVFI. 
+We experimentally validate our approach on real-world EVFI datasets, including a new one we introduce. Our method outperforms existing methods and generalizes across cameras far better than existing approaches.
+           </div>
+
+
+          </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+</section>
+
+
+
+<section class="section">
+
+
+  <div class="columns is-centered">
+  
+      <!-- Visual Effects. -->
+      <div class="column">
+        <div class="content">
+          <div class="column has-text-centered">
+          <h2 class="title is-3"> Generalized (Zero-Shot) and Consistent Video Frame Interpolation for Real-World Unseen Videos </h2>
+          <div class="columns is-centered">
+            <div style="width: 1400px; height: 150px; text-align: center; padding: 10px;">
+              We present the Zero-Shot video results of our method on real-world unseen videos, compared with representative baselines. 
+              For the HQF datasets, we skip 3 frames between the start and end frames and interpolate the frames in between. For our self-collected Clear-Motion dataset, we skip 11 frames between the start and end frames and interpolate the intermediate frames.
+              For the event-based video frame interpolation method CBMNet-Large, we used the publicly available model checkpoints trained on the same dataset (BS-ERGB) as our method. The videos display all interpolated frames between the start and end frames. As the results show, our method uniquely generalizes well across unseen real-world videos.
+           </div>
+          </div>
+
+        <h2 class="title is-5">  <b> On Clear-Motion Test Sequences: Large Translation and Rotation of Complex Texture </b> </h2>
+
+          
+          
+
+          
+          <video id="dollyzoom" autoplay controls muted loop playsinline width=1280 height=720 controls>
+            <source src="./static/videos/HTML_Teaser_2.mp4"
+                    type="video/mp4">
+                    
+          </video>
+
+
+          <p>
+          <h2 class="title is-5">  On Clear-Motion Test Sequences: Large Camera Motion Capturing Distant Objects </h2>
+          </p>
+
+
+          <video id="dollyzoom" autoplay controls muted loop playsinline width=1280 height=720 control>
+            <source src="./static/videos/HTML_Teaser_5.mp4"
+                    type="video/mp4">
+                    
+          </video>
+
+
+          <p>
+            <h2 class="title is-5"> <b> On HQF Testset: With Moving Cameras </b> </h2>
+        </p>
+        
+
+
+          <video id="dollyzoom" autoplay controls muted loop playsinline width=1280 height=720 control>
+            <source src="./static/videos/HTML_Teaser_4.mp4"
+                    type="video/mp4">
+                    
+          </video>
+
+        </div>
+
+
+        
+        </div>
+      </div>
+    </div>
+
+    <div class="columns is-centered">
+
+
+      <!-- Visual Effects. -->
+      <div class="column">
+        <div class="content">
+          <div class="column has-text-centered">
+          <h2 class="title is-3">More Qualitative Comparison Results</h2>
+         
+          <p>
+            <h2 class="title is-5"> <b> On Clear-Motion Test Sequences: Large Motion of Simple Texture </b> </h2>
+
+          </br>
+
+          
+          
+          <video id="dollyzoom" autoplay controls muted loop playsinline hwidth=1280 height=720 control>
+            <source src="./static/videos/HTML_Teaser_1.mp4"
+                    type="video/mp4">
+                    
+          </video>
+
+
+        </p>
+
+        <p>
+
+          <h2 class="title is-5"> <b> On Clear-Motion Test Sequences: Large Camera Motion Capturing Nearby Objects </b> </h2>
+
+        </p>
+          
+          <video id="dollyzoom" autoplay controls muted loop playsinline width=1280 height=720 control>
+            <source src="./static/videos/HTML_Teaser_6.mp4"
+                    type="video/mp4">
+                    
+          </video>
+
+        </p>
+        <p>
+          <h2 class="title is-5"> <b> On Clear-Motion Test Sequences: Large Motion of a Checkerboard: </b> </h2>
+        </p>
+
+          <video id="dollyzoom" autoplay controls muted loop playsinline width=1280 height=720 control>
+            <source src="./static/videos/HTML_Teaser_7.mp4"
+                    type="video/mp4">
+
+
+
+        
+        
+           </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="columns is-centered">
+
+
+      <!-- Visual Effects. -->
+      <div class="column">
+        <div class="content">
+          <div class="column has-text-centered">
+          <h2 class="title is-3">Results Showcase</h2>
+          
+          <div class="columns is-centered">
+            <div style="width: 1400px; height: 150px; text-align: center; padding: 10px;">
+              Here, we present additional video results of our method on real-world unseen videos.
+              For our self-collected Clear-Motion dataset, we skip 11 frames between the start and end frames and interpolate all frames in between. For the HQF dataset, we skip 3 frames and interpolate all intermediate frames.
+              In the results, Input refers to the low-temporal-resolution video containing only the start and end frames, Reference refers to the captured in-between frames, and Ours refers to the interpolated frames produced by our model.
+           </div>
+          </div>
+         
+          <!-- <p>
+            <h2 class="title is-5"> <b> On Clear-Motion Test Sequences: Deformable Motion of Simple Texture </b> </h2>
+          </p>
+          
+          <video id="dollyzoom" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/HTML_Teaser_8.mp4"
+                    type="video/mp4">
+                    
+          </video> -->
+
+
+          <p>
+            <h2 class="title is-5"> <b> On Clear-Motion Test Sequences: Large Motion Along the Depth Direction of a Checkerboard </b> </h2>
+          </p>
+          
+          <video id="dollyzoom" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/HTML_Teaser_9.mp4"
+                    type="video/mp4">
+                    
+          </video>
+
+      
+        <p>
+          <h2 class="title is-5"> <b> On HQF Testset: With Moving Cameras </b> </h2>
+        </p>
+
+          <video id="dollyzoom" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/HTML_Teaser_10.mp4"
+                    type="video/mp4">
+
+
+
+        
+          
+        </div>
+        
+        </div>
+      </div>
+    </div>
+
+
+<!-- 
+    <div class="columns is-centered">
+
+
+      <div class="column">
+        <div class="content">
+          <div class="column has-text-centered">
+          <h2 class="title is-3">Comparison between Event-based Video Generation and Interpolation</h2>
+
+          <div class="columns is-centered">
+          <div style="width: 1400px; height: 150px; text-align: center; padding: 10px;">
+          As mentioned in the main paper, our method was originally trained for the video generation task and can also perform video generation. 
+          The key difference between video generation and interpolation lies in the input: video generation uses only the starting frame, while interpolation utilizes both the start and end frames. 
+          Below, we compare the two tasks. Video generation often suffers from error accumulation and hallucination due to the absence of information in the start frame, whereas interpolation produces better and more consistent results by leveraging information from both the start and end frames.
+         </div>
+        </div>
+         
+          <p>
+            <h2 class="title is-5"> <b> On Clear-Motion Test Sequences: Large Motion of Simple Texture </b> </h2>
+          </p>
+          
+          <video id="dollyzoom" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/HTML_Teaser_11.mp4"
+                    type="video/mp4">
+                    
+          </video>
+        
+          
+        </div>
+        
+        </div>
+      </div>
+    </div> -->
+
+
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            The webpage template is borrowed from  <a
+              href="">nerfies</a> template.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
